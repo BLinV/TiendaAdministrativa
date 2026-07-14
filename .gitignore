@@ -1,0 +1,44 @@
+# --- Enunciado de la prueba (documento de la empresa, no entregable) ---
+docs/
+
+.env
+*.env
+!.env.example
+**/application-local.yaml
+**/application-local.yml
+**/application-secrets.yaml
+**/application-secrets.yml
+*.pem
+*.key
+
+# --- Editores / IDEs ---
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+!frontend/www/.vscode/
+.fleet/
+.settings/
+.project
+.classpath
+
+# --- Sistema operativo ---
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# --- Logs y temporales ---
+*.log
+logs/
+*.tmp
+*.bak
+*~
+
+# --- Artefactos de build sueltos fuera de backend/ y frontend/ ---
+dist/
+build/
+out/
