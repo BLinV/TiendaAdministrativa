@@ -1,11 +1,13 @@
 package com.store.www.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.store.www.dto.ProductoRequest;
@@ -30,18 +32,22 @@ public class ProductoController {
     }
 
     @GetMapping
-    public List<ProductoResponse> listar(){
-        return productoService.listar();
+    public List<ProductoResponse> listar(
+            @RequestParam(required = false) Long idCategoria,
+            @RequestParam(required = false) BigDecimal precioMax,
+            @RequestParam(required = false) String nombre) {
+        return productoService.listar(idCategoria, precioMax, nombre);
     }
-    
+
     @PostMapping
-    public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request){
+    public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
         ProductoResponse response = productoService.crear(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    
+
     @PutMapping("/{id}")
-    public ResponseEntity<ProductoResponse> actualizar(@PathVariable Long id, @Valid @RequestBody ProductoRequest request){
+    public ResponseEntity<ProductoResponse> actualizar(@PathVariable Long id,
+            @Valid @RequestBody ProductoRequest request) {
         ProductoResponse response = productoService.actualizar(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

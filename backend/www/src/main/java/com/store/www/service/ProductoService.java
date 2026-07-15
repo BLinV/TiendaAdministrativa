@@ -6,6 +6,7 @@ import com.store.www.repository.CategoriaRepositoryInterface;
 import com.store.www.repository.ProductoRepositoryInterface;
 import com.store.www.dto.ProductoRequest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.store.www.dto.ProductoResponse;
 import com.store.www.entity.Producto;
@@ -28,18 +29,10 @@ public class ProductoService {
                 p.getFechaCreacion(), p.getFechaEdicion());
     }
     
-    public List<ProductoResponse> listar() {
-        return productoRepository.findAll()
+    public List<ProductoResponse> listar(Long id, BigDecimal precioMax, String nombre) {
+        return productoRepository.buscar(id, precioMax, nombre)
                 .stream()
-                .map(producto -> new ProductoResponse(
-                        producto.getId(),
-                        producto.getNombre(),
-                        producto.getDescripcion(),
-                        producto.getPrecio(),
-                        producto.getStock(),
-                        producto.getIdCategoria(),
-                        producto.getFechaCreacion(),
-                        producto.getFechaEdicion()))
+                .map(producto -> toResponse(producto))
                 .toList();
     }
 
