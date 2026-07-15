@@ -50,6 +50,6 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<UsuarioResponse> eliminar(@PathVariable Long id) {
         UsuarioResponse response = usuarioService.eliminar(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

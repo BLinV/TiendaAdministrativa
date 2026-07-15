@@ -49,7 +49,7 @@ public class CategoriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<CategoriaResponse> eliminar(@PathVariable Long id) {
         CategoriaResponse response = categoriaService.eliminar(id);
-        return ResponseEntity.status(204).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     
 }
