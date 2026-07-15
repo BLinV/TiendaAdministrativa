@@ -2,9 +2,12 @@ package com.store.www.service;
 
 import org.springframework.stereotype.Service;
 import com.store.www.repository.CategoriaRepositoryInterface;
+import com.store.www.dto.CategoriaRequest;
 
 import java.util.List;
 import com.store.www.dto.CategoriaResponse;
+import com.store.www.entity.Categoria;
+import com.store.www.exception.RecursoNoEncontradoException;
 
 @Service
 public class CategoriaService {
@@ -24,5 +27,46 @@ public class CategoriaService {
                         categoria.getFechaCreacion(),
                         categoria.getFechaEdicion()))
                 .toList();
+    }
+
+    public CategoriaResponse crear(CategoriaRequest request) {
+        Categoria categoria = new Categoria(request.nombre(), request.descripcion());
+        categoriaRepository.save(categoria);
+        return new CategoriaResponse(
+                categoria.getId(),
+                categoria.getNombre(),
+                categoria.getDescripcion(),
+                categoria.getFechaCreacion(),
+                categoria.getFechaEdicion());
+    }
+
+    public CategoriaResponse actualizar(Long id, CategoriaRequest request) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría " + id + " no encontrada"));
+
+        categoria.setNombre(request.nombre());
+        categoria.setDescripcion(request.descripcion());
+        categoriaRepository.save(categoria);
+
+        return new CategoriaResponse(
+                categoria.getId(),
+                categoria.getNombre(),
+                categoria.getDescripcion(),
+                categoria.getFechaCreacion(),
+                categoria.getFechaEdicion());
+    }
+
+    public CategoriaResponse eliminar(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría " + id + " no encontrada"));
+
+        categoriaRepository.delete(categoria);
+
+        return new CategoriaResponse(
+                categoria.getId(),
+                categoria.getNombre(),
+                categoria.getDescripcion(),
+                categoria.getFechaCreacion(),
+                categoria.getFechaEdicion());
     }
 }
