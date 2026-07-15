@@ -12,7 +12,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-  security:
-    user:
-      name: admin
-      password: uaeTDXzxVTuuLb0KH3$g4l
+jwt:
+  secret: qUG9R8rvSw5Did2QpJgIQQXfNQdq91XqGYWRFC3LpNT
+  expiration: 3600000
