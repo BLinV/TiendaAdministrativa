@@ -27,7 +27,6 @@ export class Login {
     const { usuario, clave } = this.form.value;
     this.auth.login(usuario!, clave!).subscribe({
       next: () => this.router.navigate(['/productos']),
-      //next: () => alert('¡Login correcto! Token guardado'),
       error: () => this.error.set('Credenciales inválidas')
     });
   }
