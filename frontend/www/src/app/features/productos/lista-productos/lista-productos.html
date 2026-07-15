@@ -1,0 +1,28 @@
+<h1>Productos</h1>
+
+@if (cargando()) {
+  <p>Cargando...</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (producto of productos(); track producto.id) {
+      <tr>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.precio | currency }}</td>
+        <td>{{ producto.stock }}</td>
+      </tr>
+    } @empty {
+      <tr><td colspan="4">No hay productos</td></tr>
+    }
+  </tbody>
+</table>
