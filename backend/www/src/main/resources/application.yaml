@@ -12,3 +12,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  security:
+    user:
+      name: admin
+      password: uaeTDXzxVTuuLb0KH3$g4l
