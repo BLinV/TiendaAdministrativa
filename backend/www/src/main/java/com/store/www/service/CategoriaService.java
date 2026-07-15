@@ -17,6 +17,11 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
+    private CategoriaResponse toResponse(Categoria c) {
+        return new CategoriaResponse(c.getId(), c.getNombre(), c.getDescripcion(),
+                c.getFechaCreacion(), c.getFechaEdicion());
+    }
+
     public List<CategoriaResponse> listar() {
         return categoriaRepository.findAll()
                 .stream()
@@ -32,12 +37,7 @@ public class CategoriaService {
     public CategoriaResponse crear(CategoriaRequest request) {
         Categoria categoria = new Categoria(request.nombre(), request.descripcion());
         categoriaRepository.save(categoria);
-        return new CategoriaResponse(
-                categoria.getId(),
-                categoria.getNombre(),
-                categoria.getDescripcion(),
-                categoria.getFechaCreacion(),
-                categoria.getFechaEdicion());
+        return toResponse(categoria);
     }
 
     public CategoriaResponse actualizar(Long id, CategoriaRequest request) {
@@ -47,13 +47,7 @@ public class CategoriaService {
         categoria.setNombre(request.nombre());
         categoria.setDescripcion(request.descripcion());
         categoriaRepository.save(categoria);
-
-        return new CategoriaResponse(
-                categoria.getId(),
-                categoria.getNombre(),
-                categoria.getDescripcion(),
-                categoria.getFechaCreacion(),
-                categoria.getFechaEdicion());
+        return toResponse(categoria);
     }
 
     public CategoriaResponse eliminar(Long id) {
@@ -61,12 +55,6 @@ public class CategoriaService {
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoría " + id + " no encontrada"));
 
         categoriaRepository.delete(categoria);
-
-        return new CategoriaResponse(
-                categoria.getId(),
-                categoria.getNombre(),
-                categoria.getDescripcion(),
-                categoria.getFechaCreacion(),
-                categoria.getFechaEdicion());
+        return toResponse(categoria);
     }
 }
