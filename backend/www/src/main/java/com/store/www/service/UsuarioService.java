@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.store.www.dto.UsuarioRequest;
 import com.store.www.dto.UsuarioResponse;
 import com.store.www.entity.Usuario;
+import com.store.www.exception.RecursoNoEncontradoException;
 import com.store.www.repository.UsuarioRepositoryInterface;
 
 @Service
@@ -39,5 +40,22 @@ public class UsuarioService {
         return toResponse(usuario);
     }
 
-    
+    public UsuarioResponse actualizar(Long id, UsuarioRequest request) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
+
+        usuario.setNombre(request.nombre());
+        usuario.setUsuario(request.usuario());
+        usuario.setClave(passwordEncoder.encode(request.clave())); // ← ¡HASHEAR otra vez!
+        usuarioRepository.save(usuario);
+        return toResponse(usuario);
+    }
+
+    public UsuarioResponse eliminar(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
+        usuarioRepository.delete(usuario);
+        return toResponse(usuario);
+    }
+
 }

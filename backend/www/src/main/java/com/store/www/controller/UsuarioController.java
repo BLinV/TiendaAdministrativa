@@ -13,30 +13,43 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
     private final UsuarioService usuarioService;
-    
-    public UsuarioController(UsuarioService usuarioService){
+
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
     @GetMapping
-    public List<UsuarioResponse> listar(){
+    public List<UsuarioResponse> listar() {
         return usuarioService.listar();
     }
-    
+
     @PostMapping
-    public ResponseEntity<UsuarioResponse> crear(@Valid @RequestBody UsuarioRequest request){
+    public ResponseEntity<UsuarioResponse> crear(@Valid @RequestBody UsuarioRequest request) {
         UsuarioResponse response = usuarioService.crear(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> actualizar(@PathVariable Long id,
+            @Valid @RequestBody UsuarioRequest request) {
+        UsuarioResponse response = usuarioService.actualizar(id, request);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> eliminar(@PathVariable Long id) {
+        UsuarioResponse response = usuarioService.eliminar(id);
+        return ResponseEntity.ok(response);
+    }
 }
