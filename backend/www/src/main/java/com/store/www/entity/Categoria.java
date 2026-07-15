@@ -2,6 +2,9 @@ package com.store.www.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.generator.EventType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,12 +21,16 @@ public class Categoria {
 
     private String nombre;
     private String descripcion;
+    @Generated(event = EventType.INSERT)
     @Column(insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
+
+    @Generated(event = { EventType.INSERT, EventType.UPDATE })
     @Column(insertable = false, updatable = false)
     private LocalDateTime fechaEdicion;
 
-    public Categoria() {}
+    public Categoria() {
+    }
 
     public Categoria(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -57,5 +64,5 @@ public class Categoria {
     public LocalDateTime getFechaEdicion() {
         return fechaEdicion;
     }
-    
+
 }
