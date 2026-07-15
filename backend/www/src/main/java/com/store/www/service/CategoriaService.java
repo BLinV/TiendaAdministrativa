@@ -25,12 +25,7 @@ public class CategoriaService {
     public List<CategoriaResponse> listar() {
         return categoriaRepository.findAll()
                 .stream()
-                .map(categoria -> new CategoriaResponse(
-                        categoria.getId(),
-                        categoria.getNombre(),
-                        categoria.getDescripcion(),
-                        categoria.getFechaCreacion(),
-                        categoria.getFechaEdicion()))
+                .map(categoria -> toResponse(categoria))
                 .toList();
     }
 
