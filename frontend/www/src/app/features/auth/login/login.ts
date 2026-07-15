@@ -1,9 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
+  styleUrl: './login.scss'
 })
-export class Login {}
+export class Login {
+  private fb = inject(FormBuilder);
+  private auth = inject(Auth);
+  private router = inject(Router);
+
+  error = signal<string | null>(null);
+
+  form = this.fb.group({
+    usuario: ['', Validators.required],
+    clave: ['', Validators.required]
+  });
+
+  onSubmit(): void {
+    if (this.form.invalid) return;
+
+    const { usuario, clave } = this.form.value;
+    this.auth.login(usuario!, clave!).subscribe({
+      //next: () => this.router.navigate(['/productos']),
+      next: () => alert('¡Login correcto! Token guardado'),
+      error: () => this.error.set('Credenciales inválidas')
+    });
+  }
+}
