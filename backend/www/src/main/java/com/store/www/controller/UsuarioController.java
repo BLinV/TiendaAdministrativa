@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.store.www.dto.UsuarioRequest;
 import com.store.www.dto.UsuarioResponse;
-import com.store.www.entity.Producto;
 import com.store.www.service.UsuarioService;
 
 import jakarta.validation.Valid;
