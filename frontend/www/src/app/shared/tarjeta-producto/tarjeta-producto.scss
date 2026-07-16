@@ -1,0 +1,36 @@
+.tarjeta {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .descripcion {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .precio {
+    font-weight: bold;
+    color: #2c7a2c;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .stock {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0.25rem 0 0;
+  }
+}

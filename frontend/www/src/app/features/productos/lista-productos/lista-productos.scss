@@ -1,0 +1,21 @@
+.fila-producto {
+  display: flex;          /* pone los hijos en fila (columnas) */
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.acciones {
+  display: flex;
+  flex-direction: column; /* los 2 botones apilados (2 filas) */
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.acciones button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+app-tarjeta-producto {
+  flex: 1;                /* la tarjeta ocupa el resto del ancho */
+}

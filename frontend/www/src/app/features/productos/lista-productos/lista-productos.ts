@@ -6,10 +6,11 @@ import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
+import { TarjetaProducto } from '../../../shared/tarjeta-producto/tarjeta-producto';
 
 @Component({
   selector: 'app-lista-productos',
-  imports: [CurrencyPipe, FormsModule],
+  imports: [CurrencyPipe, FormsModule, TarjetaProducto],
   templateUrl: './lista-productos.html',
   styleUrl: './lista-productos.scss'
 })
