@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth } from '../../../core/services/auth';
+import { NotificacionService } from '../../../core/services/notificacion';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class Login {
 
   error = signal<string | null>(null);
 
+  private notif = inject(NotificacionService);
+
   form = this.fb.group({
     usuario: ['', Validators.required],
     clave: ['', Validators.required]
@@ -26,7 +29,7 @@ export class Login {
 
     const { usuario, clave } = this.form.value;
     this.auth.login(usuario!, clave!).subscribe({
-      next: () => this.router.navigate(['/productos']),
+      next: () => { this.notif.exito('Bienvenido'); this.router.navigate(['/productos']); },
       error: () => this.error.set('Credenciales inválidas')
     });
   }

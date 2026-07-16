@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../../core/services/producto';
 import { CategoriaService } from '../../../core/services/categoria';
 import { Categoria } from '../../../core/models/categoria.model';
+import { NotificacionService } from '../../../core/services/notificacion';
 
 @Component({
   selector: 'app-form-producto',
@@ -21,6 +22,8 @@ export class FormProducto implements OnInit {
   categorias = signal<Categoria[]>([]);
   editando = signal(false);
   private idEditar: number | null = null;
+
+  private notif = inject(NotificacionService);
 
   form = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(255)]],
@@ -54,8 +57,8 @@ export class FormProducto implements OnInit {
       : this.productoService.crear(datos);
 
     peticion.subscribe({
-      next: () => this.router.navigate(['/productos']),
-      error: () => alert('Error al guardar')
+      next: () => { this.notif.exito('Operación exitosa'); this.router.navigate(['/productos']); },
+      error: () => this.notif.error('Error al guardar el producto')
     });
   }
 

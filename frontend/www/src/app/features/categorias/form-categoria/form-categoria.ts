@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoriaService } from '../../../core/services/categoria';
 import { Categoria } from '../../../core/models/categoria.model';
+import { NotificacionService } from '../../../core/services/notificacion';
 
 @Component({
   selector: 'app-form-categoria',
@@ -18,6 +19,8 @@ export class FormCategoria implements OnInit {
 
   editando = signal(false);
   private idEditar: number | null = null;
+
+  private notif = inject(NotificacionService);
 
   form = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(255)]],
@@ -45,8 +48,8 @@ export class FormCategoria implements OnInit {
       : this.categoriaService.crear(datos);
 
     peticion.subscribe({
-      next: () => this.router.navigate(['/categorias']),
-      error: () => alert('Error al guardar')
+      next: () => { this.notif.exito('Operación exitosa'); this.router.navigate(['/categorias']); },
+      error: () => this.notif.error('Error al guardar')
     });
   }
 

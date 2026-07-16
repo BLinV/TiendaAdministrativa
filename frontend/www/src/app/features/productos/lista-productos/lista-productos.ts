@@ -7,6 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
 import { TarjetaProducto } from '../../../shared/tarjeta-producto/tarjeta-producto';
+import { NotificacionService } from '../../../core/services/notificacion';
 
 @Component({
   selector: 'app-lista-productos',
@@ -27,6 +28,8 @@ export class ListaProductos implements OnInit {
   filtroPrecioMax = signal<number | null>(null);
   filtroNombre = signal<string>('');
   categorias = signal<Categoria[]>([]);
+
+  private notif = inject(NotificacionService);
 
   ngOnInit(): void {
     this.categoriaService.listar().subscribe(c => this.categorias.set(c));  // para el dropdown
@@ -65,8 +68,8 @@ export class ListaProductos implements OnInit {
     if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
 
     this.productoService.eliminar(id).subscribe({
-      next: () => this.cargarProductos(),   // recargar la lista tras borrar
-      error: () => alert('No se pudo eliminar')
+      next: () => { this.notif.exito('Operación exitosa'); this.cargarProductos(); }, // recargar la lista tras borrar
+      error: () => this.notif.error('No se pudo eliminar')
     });
   }
 

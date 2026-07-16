@@ -1,9 +1,9 @@
 import { CategoriaService } from './../../../core/services/categoria';
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
+import { NotificacionService } from '../../../core/services/notificacion';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class Listacategorias implements OnInit {
   private categoriaService = inject(CategoriaService);
   private router = inject(Router);
+  private notif = inject(NotificacionService);
 
   categorias = signal<Categoria[]>([]);
   cargando = signal(false);
@@ -47,8 +48,8 @@ export class Listacategorias implements OnInit {
     if (!confirm('¿Seguro que deseas eliminar esta categoria?')) return;
 
     this.categoriaService.eliminar(id).subscribe({
-      next: () => this.cargarcategorias(),   // recargar la lista tras borrar
-      error: () => alert('No se pudo eliminar')
+      next: () => { this.notif.exito('Operación exitosa'); this.cargarcategorias(); },   // recargar la lista tras borrar
+      error: () => this.notif.error('No se pudo eliminar')
     });
   }
 }
