@@ -29,6 +29,12 @@ public class CategoriaService {
                 .toList();
     }
 
+    public CategoriaResponse obtenerPorId(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoría " + id + " no encontrada"));
+        return toResponse(categoria);
+    }
+
     public CategoriaResponse crear(CategoriaRequest request) {
         Categoria categoria = new Categoria(request.nombre(), request.descripcion());
         categoriaRepository.save(categoria);
