@@ -12,6 +12,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  server:
+    servlet:
+      encoding:
+        charset: UTF-8
+        force: true
 jwt:
   secret: qUG9R8rvSw5Did2QpJgIQQXfNQdq91XqGYWRFC3LpNT
   expiration: 3600000
