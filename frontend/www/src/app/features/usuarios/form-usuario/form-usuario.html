@@ -1,0 +1,25 @@
+<div class="contenedor">
+  <h1>{{ editando() ? 'Editar' : 'Nuevo' }} usuario</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      Nombre
+      <input type="text" formControlName="nombre" />
+    </label>
+
+    <label>
+      Usuario
+      <input type="text" formControlName="usuario" />
+    </label>
+
+    <label>
+      Contraseña
+      <input type="password" formControlName="clave" />
+    </label>
+
+    <div class="acciones-form">
+      <button type="submit" [disabled]="form.invalid">Guardar</button>
+      <button type="button" class="btn-secundario" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

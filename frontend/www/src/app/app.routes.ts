@@ -5,6 +5,8 @@ import { FormProducto } from './features/productos/form-producto/form-producto';
 import { Listacategorias } from './features/categorias/lista-categorias/lista-categorias';
 import { FormCategoria } from './features/categorias/form-categoria/form-categoria';
 import { DetalleProducto } from './features/productos/detalle-producto/detalle-producto';
+import { ListaUsuarios } from './features/usuarios/lista-usuarios/lista-usuarios';
+import { FormUsuario } from './features/usuarios/form-usuario/form-usuario';
 import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
@@ -19,4 +21,8 @@ export const routes: Routes = [
   { path: 'categorias', component: Listacategorias, canActivate: [authGuard] },
   { path: 'categorias/nuevo', component: FormCategoria, canActivate: [authGuard] },
   { path: 'categorias/editar/:id', component: FormCategoria, canActivate: [authGuard] },
+
+  { path: 'usuarios', component: ListaUsuarios, canActivate: [authGuard] },
+  { path: 'usuarios/nuevo', component: FormUsuario, canActivate: [authGuard] },
+  { path: 'usuarios/editar/:id', component: FormUsuario, canActivate: [authGuard] },
 ];

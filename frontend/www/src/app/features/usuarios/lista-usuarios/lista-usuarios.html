@@ -1,0 +1,37 @@
+<div class="contenedor">
+  <h1>Usuarios</h1>
+
+  <div class="barra-acciones">
+    <button type="button" (click)="nuevoUsuario()">Nuevo usuario</button>
+  </div>
+
+  @if (cargando()) {
+    <p>Cargando...</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (usuario of usuarios(); track usuario.id) {
+        <tr>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.usuario }}</td>
+          <td class="acciones-celda">
+            <button class="btn-secundario" (click)="editar(usuario.id)">Editar</button>
+            <button class="btn-peligro" (click)="eliminar(usuario.id)">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3">No hay usuarios.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
