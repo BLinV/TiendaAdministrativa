@@ -1,0 +1,11 @@
+<h1>Detalle del producto</h1>
+
+@if (producto(); as p) {
+  <app-tarjeta-producto [producto]="p" />   <!-- ← paso 3: usar el selector -->
+
+  <div class="acciones">
+    <button (click)="volver()">Volver</button>
+  </div>
+} @else {
+  <p>Cargando...</p>
+}

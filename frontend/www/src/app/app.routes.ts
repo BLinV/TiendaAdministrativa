@@ -4,6 +4,7 @@ import { ListaProductos } from './features/productos/lista-productos/lista-produ
 import { FormProducto } from './features/productos/form-producto/form-producto';
 import { Listacategorias } from './features/categorias/lista-categorias/lista-categorias';
 import { FormCategoria } from './features/categorias/form-categoria/form-categoria';
+import { DetalleProducto } from './features/productos/detalle-producto/detalle-producto';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
@@ -11,6 +12,7 @@ export const routes: Routes = [
     { path: 'productos', component: ListaProductos },
     { path: 'productos/nuevo', component: FormProducto },
     { path: 'productos/editar/:id', component: FormProducto },
+    { path: 'productos/:id', component: DetalleProducto },
     { path: 'categorias', component: Listacategorias },
     { path: 'categorias/nuevo', component: FormCategoria },
     { path: 'categorias/editar/:id', component: FormCategoria },

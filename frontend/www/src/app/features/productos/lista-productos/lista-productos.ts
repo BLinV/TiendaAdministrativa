@@ -3,14 +3,14 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto';
 import { Producto } from '../../../core/models/producto.model';
 import { CurrencyPipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
 import { TarjetaProducto } from '../../../shared/tarjeta-producto/tarjeta-producto';
 
 @Component({
   selector: 'app-lista-productos',
-  imports: [CurrencyPipe, FormsModule, TarjetaProducto],
+  imports: [CurrencyPipe, FormsModule, TarjetaProducto, RouterLink],
   templateUrl: './lista-productos.html',
   styleUrl: './lista-productos.scss'
 })
@@ -51,6 +51,10 @@ export class ListaProductos implements OnInit {
 
   administrarCategorias(): void {
     this.router.navigate(['/categorias']);
+  }
+
+  verDetalle(id: number): void {
+    this.router.navigate(['/productos', id]);
   }
 
   editar(id: number): void {
