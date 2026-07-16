@@ -4,6 +4,24 @@
   <p>Cargando...</p>
 }
 
+<div class="filtros">
+  <select [ngModel]="filtroCategoria()" (ngModelChange)="filtroCategoria.set($event)">
+    <option [ngValue]="null">Todas las categorías</option>
+    @for (cat of categorias(); track cat.id) {
+      <option [ngValue]="cat.id">{{ cat.nombre }}</option>
+    }
+  </select>
+
+  <input type="number" placeholder="Precio máximo"
+         [ngModel]="filtroPrecioMax()" (ngModelChange)="filtroPrecioMax.set($event)" />
+
+  <input type="text" placeholder="Buscar por nombre"
+         [ngModel]="filtroNombre()" (ngModelChange)="filtroNombre.set($event)" />
+
+  <button (click)="cargarProductos()">Filtrar</button>
+  <button (click)="limpiarFiltros()">Limpiar</button>
+</div>
+
 <table>
   <thead>
     <tr>
