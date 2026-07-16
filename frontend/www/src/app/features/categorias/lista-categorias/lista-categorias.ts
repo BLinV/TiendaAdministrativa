@@ -36,10 +36,6 @@ export class Listacategorias implements OnInit {
     this.router.navigate(['/categorias/nuevo']);
   }
 
-  administrarProductos(): void {
-    this.router.navigate(['/productos']);
-  }
-
   editar(id: number): void {
     this.router.navigate(['/categorias/editar', id]);
   }

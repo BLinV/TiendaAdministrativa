@@ -1,21 +1,45 @@
-.fila-producto {
-  display: flex;          /* pone los hijos en fila (columnas) */
-  gap: 1rem;
-  align-items: stretch;
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  select,
+  input {
+    width: auto;
+    flex: 1 1 180px;
+    margin-top: 0;
+  }
+}
+
+/* rejilla responsive de tarjetas */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.celda-producto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* el enlace envuelve la tarjeta pero sin subrayado ni color de link */
+.tarjeta-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .acciones {
   display: flex;
-  flex-direction: column; /* los 2 botones apilados (2 filas) */
   gap: 0.5rem;
-  justify-content: center;
-}
 
-.acciones button {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
-app-tarjeta-producto {
-  flex: 1;                /* la tarjeta ocupa el resto del ancho */
+  button {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
 }

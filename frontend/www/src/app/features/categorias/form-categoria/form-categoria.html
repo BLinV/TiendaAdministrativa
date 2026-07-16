@@ -1,16 +1,20 @@
-<h1>{{ editando() ? 'Editar' : 'Nuevo' }} categoria</h1>
+<div class="contenedor">
+  <h1>{{ editando() ? 'Editar' : 'Nueva' }} categoría</h1>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>
-    Nombre
-    <input type="text" formControlName="nombre" />
-  </label>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      Nombre
+      <input type="text" formControlName="nombre" />
+    </label>
 
-  <label>
-    Descripción
-    <input type="text" formControlName="descripcion" />
-  </label>
+    <label>
+      Descripción
+      <input type="text" formControlName="descripcion" />
+    </label>
 
-  <button type="submit" [disabled]="form.invalid">Guardar</button>
-  <button type="button" (click)="cancelar()">Cancelar</button>
-</form>
+    <div class="acciones-form">
+      <button type="submit" [disabled]="form.invalid">Guardar</button>
+      <button type="button" class="btn-secundario" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

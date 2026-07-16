@@ -1,1 +1,134 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Estilos globales — lenguaje visual común de toda la app.
+   Los componentes heredan de aquí; solo añaden lo suyo propio.
+   ============================================================ */
+
+/* --- Variables de color y medidas (design tokens) --- */
+:root {
+  --color-primario: #2563eb;
+  --color-primario-hover: #1d4ed8;
+  --color-exito: #16a34a;
+  --color-error: #dc2626;
+  --color-texto: #1f2937;
+  --color-texto-suave: #6b7280;
+  --color-borde: #e5e7eb;
+  --color-fondo: #f9fafb;
+  --color-superficie: #ffffff;
+  --radio: 8px;
+  --sombra: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --sombra-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Reset básico y tipografía --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+  line-height: 1.5;
+}
+
+h1 { font-size: 1.75rem; margin: 0 0 1rem; }
+h2 { font-size: 1.35rem; margin: 0 0 0.75rem; }
+
+/* --- Botones (clases utilitarias) --- */
+button,
+.btn {
+  font: inherit;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: var(--radio);
+  background: var(--color-primario);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: var(--color-primario-hover); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.btn-secundario {
+  background: #fff;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  &:hover { background: var(--color-fondo); }
+}
+
+.btn-peligro {
+  background: var(--color-error);
+  &:hover { background: #b91c1c; }
+}
+
+/* --- Formularios --- */
+label {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font: inherit;
+  background: #fff;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+}
+
+/* --- Tablas --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+th {
+  background: var(--color-fondo);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* --- Contenedor de página --- */
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* --- Grupos de botones con separación --- */
+.acciones-form,
+.barra-acciones,
+.acciones-celda {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.acciones-form { margin-top: 1.25rem; }
+.barra-acciones { margin-bottom: 1.25rem; }
+.acciones-celda { justify-content: flex-end; }

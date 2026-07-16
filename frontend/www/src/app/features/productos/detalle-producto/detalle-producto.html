@@ -1,11 +1,13 @@
-<h1>Detalle del producto</h1>
+<div class="contenedor">
+  <h1>Detalle del producto</h1>
 
-@if (producto(); as p) {
-  <app-tarjeta-producto [producto]="p" />   <!-- ← paso 3: usar el selector -->
+  @if (producto(); as p) {
+    <app-tarjeta-producto [producto]="p" />
 
-  <div class="acciones">
-    <button (click)="volver()">Volver</button>
-  </div>
-} @else {
-  <p>Cargando...</p>
-}
+    <div class="acciones-form">
+      <button class="btn-secundario" (click)="volver()">Volver</button>
+    </div>
+  } @else {
+    <p>Cargando...</p>
+  }
+</div>

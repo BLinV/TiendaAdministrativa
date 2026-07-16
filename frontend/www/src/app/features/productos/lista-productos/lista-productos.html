@@ -1,49 +1,50 @@
-<h1>Productos</h1>
+<div class="contenedor">
+  <h1>Productos</h1>
 
-@if (cargando()) {
-  <p>Cargando...</p>
-}
+  <div class="filtros">
+    <select [ngModel]="filtroCategoria()" (ngModelChange)="filtroCategoria.set($event)">
+      <option [ngValue]="null">Todas las categorías</option>
+      @for (cat of categorias(); track cat.id) {
+        <option [ngValue]="cat.id">{{ cat.nombre }}</option>
+      }
+    </select>
 
-<div class="filtros">
-  <select [ngModel]="filtroCategoria()" (ngModelChange)="filtroCategoria.set($event)">
-    <option [ngValue]="null">Todas las categorías</option>
-    @for (cat of categorias(); track cat.id) {
-      <option [ngValue]="cat.id">{{ cat.nombre }}</option>
-    }
-  </select>
+    <input
+      type="number"
+      placeholder="Precio máximo"
+      [ngModel]="filtroPrecioMax()"
+      (ngModelChange)="filtroPrecioMax.set($event)"
+    />
 
-  <input
-    type="number"
-    placeholder="Precio máximo"
-    [ngModel]="filtroPrecioMax()"
-    (ngModelChange)="filtroPrecioMax.set($event)"
-  />
+    <input
+      type="text"
+      placeholder="Buscar por nombre"
+      [ngModel]="filtroNombre()"
+      (ngModelChange)="filtroNombre.set($event)"
+    />
 
-  <input
-    type="text"
-    placeholder="Buscar por nombre"
-    [ngModel]="filtroNombre()"
-    (ngModelChange)="filtroNombre.set($event)"
-  />
+    <button (click)="cargarProductos()">Filtrar</button>
+    <button class="btn-secundario" (click)="limpiarFiltros()">Limpiar</button>
+    <button (click)="nuevoProducto()">Nuevo</button>
+  </div>
 
-  <button (click)="cargarProductos()">Filtrar</button>
-  <button (click)="limpiarFiltros()">Limpiar</button>
-
-  <button type="button" (click)="nuevoProducto()">Nuevo</button>
-  <button type="button" (click)="administrarCategorias()">Administrar Categorias</button>
-</div>
-
-<div class="grid-productos">
-  @for (producto of productos(); track producto.id) {
-    <div class="fila-producto">
-      <div class="acciones">
-        <button (click)="editar(producto.id)">Editar</button>
-        <button (click)="eliminar(producto.id)">Eliminar</button>
-      </div>
-
-      <a [routerLink]="['/productos', producto.id]" class="tarjeta-link">
-        <app-tarjeta-producto [producto]="producto" />
-      </a>
-    </div>
+  @if (cargando()) {
+    <p>Cargando...</p>
   }
+
+  <div class="grid-productos">
+    @for (producto of productos(); track producto.id) {
+      <div class="celda-producto">
+        <a [routerLink]="['/productos', producto.id]" class="tarjeta-link">
+          <app-tarjeta-producto [producto]="producto" />
+        </a>
+        <div class="acciones">
+          <button class="btn-secundario" (click)="editar(producto.id)">Editar</button>
+          <button class="btn-peligro" (click)="eliminar(producto.id)">Eliminar</button>
+        </div>
+      </div>
+    } @empty {
+      <p>No hay productos.</p>
+    }
+  </div>
 </div>

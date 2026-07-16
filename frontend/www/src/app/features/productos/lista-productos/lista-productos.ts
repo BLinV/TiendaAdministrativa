@@ -52,10 +52,6 @@ export class ListaProductos implements OnInit {
     this.router.navigate(['/productos/nuevo']);
   }
 
-  administrarCategorias(): void {
-    this.router.navigate(['/categorias']);
-  }
-
   verDetalle(id: number): void {
     this.router.navigate(['/productos', id]);
   }

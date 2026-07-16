@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--color-superficie);
+  border-bottom: 1px solid var(--color-borde);
+  box-shadow: var(--sombra);
+}
+
+.marca {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-primario);
+}
+
+.enlaces {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+
+  a {
+    text-decoration: none;
+    color: var(--color-texto-suave);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radio);
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: var(--color-fondo);
+      color: var(--color-texto);
+    }
+
+    /* la ruta activa se resalta */
+    &.activo {
+      background: var(--color-primario);
+      color: #fff;
+    }
+  }
+}
