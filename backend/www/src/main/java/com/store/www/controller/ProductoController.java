@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.store.www.dto.CategoriaResponse;
 import com.store.www.dto.ProductoRequest;
 import com.store.www.dto.ProductoResponse;
 import com.store.www.service.ProductoService;

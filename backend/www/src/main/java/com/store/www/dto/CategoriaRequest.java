@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public record CategoriaRequest(
                 @NotBlank
-                @Size(max = 255)
+                @Size(max = 100)
                 String nombre,
                 
                 @Size(max = 255)

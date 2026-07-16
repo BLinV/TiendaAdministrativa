@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import com.store.www.dto.CategoriaResponse;
 import com.store.www.dto.UsuarioRequest;
 import com.store.www.dto.UsuarioResponse;
 import com.store.www.service.UsuarioService;

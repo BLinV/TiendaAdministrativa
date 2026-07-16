@@ -6,11 +6,11 @@ import jakarta.validation.constraints.Size;
 
 public record UsuarioRequest(
                 @NotBlank
-                @Size(max = 255)
+                @Size(max = 100)
                 String nombre,
 
                 @NotNull
-                @Size(max = 255)
+                @Size(min = 4, max = 30)
                 String usuario,
 
                 @NotBlank

@@ -2,7 +2,6 @@ package com.store.www.dto;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,7 +10,7 @@ import jakarta.validation.constraints.Size;
 
 public record ProductoRequest(
                 @NotBlank
-                @Size(max = 255)
+                @Size(max = 100)
                 String nombre,
 
                 @NotNull
@@ -27,6 +26,5 @@ public record ProductoRequest(
                 Integer stock,
                 
                 @NotNull
-                @ManyToOne
                 Long idCategoria) {
 }
