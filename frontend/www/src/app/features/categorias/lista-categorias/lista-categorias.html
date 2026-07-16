@@ -1,0 +1,33 @@
+<h1>Categorias</h1>
+
+@if (cargando()) {
+  <p>Cargando...</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (categoria of categorias(); track categoria.id) {
+      <tr>
+        <td>{{ categoria.nombre }}</td>
+        <td>{{ categoria.descripcion }}</td>
+        <td>
+          <button (click)="editar(categoria.id)">Editar</button>
+          <button (click)="eliminar(categoria.id)">Eliminar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="2">No hay categorias</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<button type="button" (click)="nuevaCategoria()">Nuevo</button>
+<button type="button" (click)="administrarProductos()">Regresar</button>

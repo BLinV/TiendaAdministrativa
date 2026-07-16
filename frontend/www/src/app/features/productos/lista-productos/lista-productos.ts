@@ -48,6 +48,10 @@ export class ListaProductos implements OnInit {
     this.router.navigate(['/productos/nuevo']);
   }
 
+  administrarCategorias(): void {
+    this.router.navigate(['/categorias']);
+  }
+
   editar(id: number): void {
     this.router.navigate(['/productos/editar', id]);
   }
