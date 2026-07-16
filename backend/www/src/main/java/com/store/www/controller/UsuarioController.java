@@ -34,6 +34,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listar());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.obtenerPorId(id));
+    }
+
     @PostMapping
     public ResponseEntity<UsuarioResponse> crear(@Valid @RequestBody UsuarioRequest request) {
         UsuarioResponse response = usuarioService.crear(request);
