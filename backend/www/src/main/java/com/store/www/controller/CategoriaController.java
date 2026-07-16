@@ -30,8 +30,8 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public List<CategoriaResponse> listar() {
-        return categoriaService.listar();
+    public ResponseEntity<List<CategoriaResponse>> listar() {
+        return ResponseEntity.ok(categoriaService.listar());
     }
 
     @GetMapping("/{id}")
@@ -49,13 +49,12 @@ public class CategoriaController {
     public ResponseEntity<CategoriaResponse> actualizar(@PathVariable Long id,
             @Valid @RequestBody CategoriaRequest request) {
         CategoriaResponse response = categoriaService.actualizar(id, request);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CategoriaResponse> eliminar(@PathVariable Long id) {
-        CategoriaResponse response = categoriaService.eliminar(id);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        categoriaService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
-
 }

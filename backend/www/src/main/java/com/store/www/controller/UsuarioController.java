@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import com.store.www.dto.CategoriaResponse;
 import com.store.www.dto.UsuarioRequest;
 import com.store.www.dto.UsuarioResponse;
 import com.store.www.service.UsuarioService;
@@ -30,8 +31,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<UsuarioResponse> listar() {
-        return usuarioService.listar();
+    public ResponseEntity<List<UsuarioResponse>> listar() {
+        return ResponseEntity.ok(usuarioService.listar());
     }
 
     @PostMapping
@@ -44,12 +45,12 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> actualizar(@PathVariable Long id,
             @Valid @RequestBody UsuarioRequest request) {
         UsuarioResponse response = usuarioService.actualizar(id, request);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UsuarioResponse> eliminar(@PathVariable Long id) {
-        UsuarioResponse response = usuarioService.eliminar(id);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        usuarioService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

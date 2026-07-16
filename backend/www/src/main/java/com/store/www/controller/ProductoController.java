@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.store.www.dto.CategoriaResponse;
 import com.store.www.dto.ProductoRequest;
 import com.store.www.dto.ProductoResponse;
 import com.store.www.service.ProductoService;
@@ -32,11 +33,11 @@ public class ProductoController {
     }
 
     @GetMapping
-    public List<ProductoResponse> listar(
+    public ResponseEntity<List<ProductoResponse>> listar(
             @RequestParam(required = false) Long idCategoria,
             @RequestParam(required = false) BigDecimal precioMax,
             @RequestParam(required = false) String nombre) {
-        return productoService.listar(idCategoria, precioMax, nombre);
+        return ResponseEntity.ok(productoService.listar(idCategoria, precioMax, nombre));
     }
 
     @GetMapping("/{id}")
@@ -54,12 +55,12 @@ public class ProductoController {
     public ResponseEntity<ProductoResponse> actualizar(@PathVariable Long id,
             @Valid @RequestBody ProductoRequest request) {
         ProductoResponse response = productoService.actualizar(id, request);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProductoResponse> eliminar(@PathVariable Long id) {
-        ProductoResponse response = productoService.eliminar(id);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        productoService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }
