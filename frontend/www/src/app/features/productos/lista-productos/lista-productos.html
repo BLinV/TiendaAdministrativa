@@ -20,9 +20,17 @@
         <td>{{ producto.descripcion }}</td>
         <td>{{ producto.precio | currency }}</td>
         <td>{{ producto.stock }}</td>
+        <td>
+          <button (click)="editar(producto.id)">Editar</button>
+          <button (click)="eliminar(producto.id)">Eliminar</button>
+        </td>
       </tr>
     } @empty {
-      <tr><td colspan="4">No hay productos</td></tr>
+      <tr>
+        <td colspan="4">No hay productos</td>
+      </tr>
     }
   </tbody>
 </table>
+
+<button type="button" (click)="nuevoProducto()">Nuevo</button>
