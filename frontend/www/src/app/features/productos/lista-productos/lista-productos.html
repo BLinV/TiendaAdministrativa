@@ -37,7 +37,6 @@
   @for (producto of productos(); track producto.id) {
     <div class="fila-producto">
       <div class="acciones">
-        <button (click)="verDetalle(producto.id)">Ver</button>
         <button (click)="editar(producto.id)">Editar</button>
         <button (click)="eliminar(producto.id)">Eliminar</button>
       </div>
