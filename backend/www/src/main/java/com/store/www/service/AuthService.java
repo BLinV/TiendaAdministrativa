@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.store.www.dto.LoginRequest;
 import com.store.www.entity.Usuario;
 import com.store.www.exception.CredencialesInvalidasException;
-import com.store.www.exception.RecursoNoEncontradoException;
 import com.store.www.repository.UsuarioRepositoryInterface;
 
 @Service
