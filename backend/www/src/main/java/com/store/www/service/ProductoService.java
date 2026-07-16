@@ -36,6 +36,12 @@ public class ProductoService {
                 .toList();
     }
 
+    public ProductoResponse obtenerPorId(Long id) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Producto " + id + " no encontrado"));
+        return toResponse(producto);
+    }
+
     public ProductoResponse crear(ProductoRequest request) {
         if (!categoriaRepository.existsById(request.idCategoria()))
             throw new RecursoNoEncontradoException("Categoría " + request.idCategoria() + " no encontrada");

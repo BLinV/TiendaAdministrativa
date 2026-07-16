@@ -39,6 +39,11 @@ public class ProductoController {
         return productoService.listar(idCategoria, precioMax, nombre);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductoResponse> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(productoService.obtenerPorId(id));
+    }
+
     @PostMapping
     public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
         ProductoResponse response = productoService.crear(request);
