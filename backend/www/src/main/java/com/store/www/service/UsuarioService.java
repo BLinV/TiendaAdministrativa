@@ -33,6 +33,12 @@ public class UsuarioService {
                 .toList();
     }
 
+    public UsuarioResponse obtenerPorId(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+         .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
+         return toResponse(usuario);
+    }
+
     public UsuarioResponse crear(UsuarioRequest request) {
         String hash = passwordEncoder.encode(request.clave());
         Usuario usuario = new Usuario(request.nombre(), request.usuario(), hash);
