@@ -21,8 +21,8 @@ export class FormUsuario implements OnInit {
   private idEditar: number | null = null;
 
   form = this.fb.group({
-    nombre: ['', [Validators.required, Validators.maxLength(255)]],
-    usuario: ['', [Validators.required, Validators.maxLength(255)]],
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    usuario: ['', [Validators.required, Validators.maxLength(30)]],
     clave: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]]
   });
 

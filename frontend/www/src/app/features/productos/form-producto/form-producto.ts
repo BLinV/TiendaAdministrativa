@@ -26,7 +26,7 @@ export class FormProducto implements OnInit {
   private notif = inject(NotificacionService);
 
   form = this.fb.group({
-    nombre: ['', [Validators.required, Validators.maxLength(255)]],
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
     descripcion: ['', Validators.maxLength(255)],
     precio: [0, [Validators.required, Validators.min(0.01)]],
     stock: [0, [Validators.required, Validators.min(0)]],
