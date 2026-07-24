@@ -24,7 +24,21 @@ export class Auth {
     localStorage.removeItem(this.TOKEN_KEY);
   }
 
+  private expirado(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp * 1000 < Date.now();
+    } catch {
+      return true;                    // token ilegible → inválido
+    }
+  }
+
   estaAutenticado(): boolean {
-    return this.getToken() !== null;
+    const token = this.getToken();
+    if (!token || this.expirado(token)) {
+      this.logout();                  // limpia el token muerto de paso
+      return false;
+    }
+    return true;
   }
 }
