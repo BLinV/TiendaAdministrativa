@@ -8,9 +8,12 @@ import org.hibernate.generator.EventType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +27,9 @@ public class Producto {
     private String descripcion;
     private BigDecimal precio;
     private Integer stock;
-    private Long idCategoria;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Categoria categoria;
 
     @Generated(event = EventType.INSERT)
     @Column(insertable = false, updatable = false)
@@ -37,12 +42,12 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, BigDecimal precio, Integer stock, Long idCategoria) {
+    public Producto(String nombre, String descripcion, BigDecimal precio, Integer stock, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -81,12 +86,12 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Long getIdCategoria() {
-        return idCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(Long idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public LocalDateTime getFechaCreacion() {

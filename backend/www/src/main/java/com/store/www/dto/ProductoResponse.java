@@ -10,6 +10,7 @@ public record ProductoResponse(
                 BigDecimal precio,
                 Integer stock,
                 Long idCategoria,
+                String nombreCategoria,
                 LocalDateTime fechaCreacion,
                 LocalDateTime fechaEdicion) {
 }

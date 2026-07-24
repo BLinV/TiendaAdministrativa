@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.store.www.dto.ProductoRequest;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class ProductoServiceTest {
@@ -26,8 +27,8 @@ class ProductoServiceTest {
     @Test
     void crear_categoriaInexistente_lanzaExcepcion() {
         // ARRANGE: la categoría 999 no existe
-        when(categoriaRepository.existsById(999L)).thenReturn(false);
-        var request = new ProductoRequest("Test", "desc", new BigDecimal("10"), 5, 999L);
+        when(categoriaRepository.findById(999L)).thenReturn(Optional.empty());
+        var request = new ProductoRequest("Test", "desc", new BigDecimal("10"),5, 999L);
 
         // ACT + ASSERT
         assertThrows(RecursoNoEncontradoException.class,
