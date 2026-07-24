@@ -55,7 +55,7 @@ class AuthServiceTest {
     }
 
     @Test
-    void autenticar_usuarioClaveCorrecta_lanzaValidacion() {
+    void autenticar_credencialesCorrectas_devuelveToken() {
         Usuario usuario = new Usuario("Admin", "admin", "$2b$10$hashGuardado");
         when(usuarioRepository.findByUsuario("admin")).thenReturn(Optional.of(usuario));
         when(passwordEncoder.matches("admin123", "$2b$10$hashGuardado")).thenReturn(true); // ← clave OK
