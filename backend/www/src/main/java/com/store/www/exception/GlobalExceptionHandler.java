@@ -26,13 +26,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponse> manejarIntegridad(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new ErrorResponse("No se puede eliminar: el recurso tiene elementos asociados"));
+                .body(new ErrorResponse("La operación no respeta una restricción de integridad de los datos"));
     }
 
     @ExceptionHandler(RecursoNoEncontradoException.class)
     public ResponseEntity<ErrorResponse> manejarNoEncontrado(RecursoNoEncontradoException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse("La operación no respeta una restricción de integridad de los datos"));
+                .body(new ErrorResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(CredencialesInvalidasException.class)
