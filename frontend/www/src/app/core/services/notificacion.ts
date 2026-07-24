@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export interface Notificacion {
   tipo: 'exito' | 'error';
@@ -22,5 +23,9 @@ export class NotificacionService {
     this.notificacion.set({ tipo, mensaje });
     // se oculta sola tras 3 segundos
     setTimeout(() => this.notificacion.set(null), 3000);
+  }
+
+  errorDesde(err: HttpErrorResponse, porDefecto: string): void {
+    this.error(err.error?.mensaje ?? porDefecto);
   }
 }

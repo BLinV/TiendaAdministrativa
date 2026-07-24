@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuario';
 import { Usuario } from '../../../core/models/usuario.model';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -43,7 +44,7 @@ export class ListaUsuarios implements OnInit {
 
     this.usuarioService.eliminar(id).subscribe({
       next: () => { this.notif.exito('Usuario eliminado'); this.cargarUsuarios(); },
-      error: () => this.notif.error('No se pudo eliminar')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'No se pudo eliminar')
     });
   }
 }

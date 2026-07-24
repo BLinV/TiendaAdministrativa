@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -45,7 +46,7 @@ export class Listacategorias implements OnInit {
 
     this.categoriaService.eliminar(id).subscribe({
       next: () => { this.notif.exito('Operación exitosa'); this.cargarcategorias(); },   // recargar la lista tras borrar
-      error: () => this.notif.error('No se pudo eliminar')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'No se pudo eliminar')
     });
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ export class Login {
     const { usuario, clave } = this.form.value;
     this.auth.login(usuario!, clave!).subscribe({
       next: () => { this.notif.exito('Bienvenido'); this.router.navigate(['/productos']); },
-      error: () => this.error.set('Credenciales inválidas')
+      error: (err: HttpErrorResponse) => this.error.set(err.error?.mensaje ?? 'Credenciales inválidas')
     });
   }
 }

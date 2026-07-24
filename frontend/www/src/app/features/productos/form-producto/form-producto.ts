@@ -5,6 +5,7 @@ import { ProductoService } from '../../../core/services/producto';
 import { CategoriaService } from '../../../core/services/categoria';
 import { Categoria } from '../../../core/models/categoria.model';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-producto',
@@ -58,7 +59,7 @@ export class FormProducto implements OnInit {
 
     peticion.subscribe({
       next: () => { this.notif.exito('Operación exitosa'); this.router.navigate(['/productos']); },
-      error: () => this.notif.error('Error al guardar el producto')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'Error al guardar el producto')
     });
   }
 

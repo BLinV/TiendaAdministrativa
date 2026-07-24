@@ -7,6 +7,7 @@ import { Categoria } from '../../../core/models/categoria.model';
 import { FormsModule } from '@angular/forms';
 import { TarjetaProducto } from '../../../shared/tarjeta-producto/tarjeta-producto';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-lista-productos',
@@ -60,7 +61,7 @@ export class ListaProductos implements OnInit {
 
     this.productoService.eliminar(id).subscribe({
       next: () => { this.notif.exito('Operación exitosa'); this.cargarProductos(); }, // recargar la lista tras borrar
-      error: () => this.notif.error('No se pudo eliminar')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'No se pudo eliminar')
     });
   }
 

@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuario';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-usuario',
@@ -49,7 +50,7 @@ export class FormUsuario implements OnInit {
 
     peticion.subscribe({
       next: () => { this.notif.exito('Operación exitosa'); this.router.navigate(['/usuarios']); },
-      error: () => this.notif.error('Error al guardar')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'Error al guardar')
     });
   }
 

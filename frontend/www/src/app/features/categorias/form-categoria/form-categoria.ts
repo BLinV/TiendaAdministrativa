@@ -2,8 +2,8 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoriaService } from '../../../core/services/categoria';
-import { Categoria } from '../../../core/models/categoria.model';
 import { NotificacionService } from '../../../core/services/notificacion';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-categoria',
@@ -49,7 +49,7 @@ export class FormCategoria implements OnInit {
 
     peticion.subscribe({
       next: () => { this.notif.exito('Operación exitosa'); this.router.navigate(['/categorias']); },
-      error: () => this.notif.error('Error al guardar')
+      error: (err: HttpErrorResponse) => this.notif.errorDesde(err, 'Error al guardar')
     });
   }
 
