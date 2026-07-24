@@ -12,7 +12,6 @@ public record UsuarioRequest(
                 @Size(min = 4, max = 30)
                 String usuario,
 
-                @NotBlank
                 @Size(min = 4, max = 100)
                 String clave) {
 }

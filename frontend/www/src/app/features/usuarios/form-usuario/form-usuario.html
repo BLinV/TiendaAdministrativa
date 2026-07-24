@@ -14,7 +14,7 @@
 
     <label>
       Contraseña
-      <input type="password" formControlName="clave" />
+      <input type="password" formControlName="clave" [placeholder]="editando() ? 'Dejar vacío para no cambiarla' : ''" />
     </label>
 
     <div class="acciones-form">

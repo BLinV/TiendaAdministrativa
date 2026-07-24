@@ -35,11 +35,13 @@ public class UsuarioService {
 
     public UsuarioResponse obtenerPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-         .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
-         return toResponse(usuario);
+                .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
+        return toResponse(usuario);
     }
 
     public UsuarioResponse crear(UsuarioRequest request) {
+        if (request.clave() == null || request.clave().isBlank())
+            throw new IllegalArgumentException("La clave es obligatoria al crear un usuario");
         String hash = passwordEncoder.encode(request.clave());
         Usuario usuario = new Usuario(request.nombre(), request.usuario(), hash);
         usuarioRepository.save(usuario);
@@ -52,7 +54,9 @@ public class UsuarioService {
 
         usuario.setNombre(request.nombre());
         usuario.setUsuario(request.usuario());
-        usuario.setClave(passwordEncoder.encode(request.clave())); // ← ¡HASHEAR otra vez!
+        if (request.clave() != null && !request.clave().isBlank()) {
+            usuario.setClave(passwordEncoder.encode(request.clave())); // ← ¡HASHEAR otra vez!
+        }
         usuarioRepository.save(usuario);
         return toResponse(usuario);
     }

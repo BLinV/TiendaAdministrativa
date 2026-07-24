@@ -32,6 +32,10 @@ export class FormUsuario implements OnInit {
     if (id) {
       this.editando.set(true);
       this.idEditar = Number(id);
+      // Al editar, la clave es opcional: vacía significa "no la cambies".
+      this.form.controls.clave.removeValidators(Validators.required);
+      this.form.controls.clave.updateValueAndValidity();
+
       // El backend NO devuelve la clave (por seguridad), así que solo se
       // rellenan nombre y usuario. La clave debe reescribirse al editar.
       this.usuarioService.obtenerPorId(this.idEditar).subscribe(u => {
@@ -42,7 +46,11 @@ export class FormUsuario implements OnInit {
 
   onSubmit(): void {
     if (this.form.invalid) return;
-    const datos = this.form.value as any;
+
+    const datos = { ...this.form.value } as any;
+    if (this.editando() && !datos.clave) {
+      delete datos.clave;
+    }
 
     const peticion = this.editando()
       ? this.usuarioService.actualizar(this.idEditar!, datos)

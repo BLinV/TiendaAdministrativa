@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse("Datos inválidos", errores));
     }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponse> manejarIntegridad(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -31,12 +32,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RecursoNoEncontradoException.class)
     public ResponseEntity<ErrorResponse> manejarNoEncontrado(RecursoNoEncontradoException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse(ex.getMessage()));
+                .body(new ErrorResponse("La operación no respeta una restricción de integridad de los datos"));
     }
-    
+
     @ExceptionHandler(CredencialesInvalidasException.class)
     public ResponseEntity<ErrorResponse> manejarCredenciales(CredencialesInvalidasException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ErrorResponse(ex.getMessage()));
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> manejarArgumentoInvalido(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage()));
+    }
+
 }
