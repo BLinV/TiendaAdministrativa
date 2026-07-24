@@ -58,11 +58,24 @@ Desde `backend/www`:
 
 ```bash
 ./mvnw spring-boot:run     # levanta la API en http://localhost:8080
-./mvnw test                # ejecuta las pruebas unitarias (JUnit + Mockito)
 ```
 
 La configuración de conexión está en `src/main/resources/application.yaml`.
 Si tu MySQL usa credenciales distintas a las del script, ajústalas ahí.
+
+### Pruebas
+
+```bash
+./mvnw test                       # unitarias (JUnit + Mockito) — no requiere base de datos
+./mvnw test -Dgrupos.excluidos=   # añade las de integración — requiere MySQL en marcha
+```
+
+Las unitarias aíslan cada servicio con Mockito y terminan en unos segundos.
+
+`WwwApplicationTests` está etiquetado como `integracion` y **queda excluido por
+defecto**: arranca el contexto completo de Spring y, gracias a
+`ddl-auto: validate`, comprueba que el mapeo JPA cuadra con el esquema real. Por
+eso necesita la base de datos creada y el servidor MySQL en ejecución.
 
 ### Documentación de la API (Swagger)
 
@@ -100,8 +113,11 @@ El frontend consume la API en `http://localhost:8080/api` (configurable en
 - **CRUD de productos** (nombre, descripción, precio, stock, categoría).
 - **CRUD de categorías** (nombre, descripción).
 - **CRUD de usuarios** (con contraseña cifrada mediante BCrypt).
-- **Búsqueda de productos** por categoría, precio máximo y nombre (filtros combinables).
-- **Validaciones** de campos y manejo de errores HTTP (404, 400).
+- **Búsqueda de productos** por categoría, precio máximo y nombre (filtros combinables),
+  resuelta con un `JOIN FETCH` que trae la categoría en la misma consulta.
+- **Validaciones** de campos y **respuestas de error uniformes**: todas comparten la
+  forma `{"mensaje": "..."}`, y las de validación añaden `campos` con el detalle por
+  campo. Códigos usados: 400, 401, 404 y 409.
 - **Vista detalle** de producto y componente de tarjeta reutilizable.
 - **Notificaciones** de éxito/error en las operaciones.
 
