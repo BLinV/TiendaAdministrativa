@@ -67,10 +67,9 @@ public class ProductoService {
         return toResponse(producto);
     }
 
-    public ProductoResponse eliminar(Long id) {
+    public void eliminar(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto " + id + " no encontrado"));
         productoRepository.delete(producto);
-        return toResponse(producto);
     }
 }

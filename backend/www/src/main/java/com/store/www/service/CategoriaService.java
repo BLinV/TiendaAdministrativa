@@ -51,11 +51,9 @@ public class CategoriaService {
         return toResponse(categoria);
     }
 
-    public CategoriaResponse eliminar(Long id) {
+    public void eliminar(Long id) {
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoría " + id + " no encontrada"));
-
         categoriaRepository.delete(categoria);
-        return toResponse(categoria);
     }
 }

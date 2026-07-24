@@ -57,11 +57,10 @@ public class UsuarioService {
         return toResponse(usuario);
     }
 
-    public UsuarioResponse eliminar(Long id) {
+    public void eliminar(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario " + id + " no encontrado"));
         usuarioRepository.delete(usuario);
-        return toResponse(usuario);
     }
 
 }
