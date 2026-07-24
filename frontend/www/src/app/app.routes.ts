@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './features/auth/login/login';
 import { ListaProductos } from './features/productos/lista-productos/lista-productos';
 import { FormProducto } from './features/productos/form-producto/form-producto';
-import { Listacategorias } from './features/categorias/lista-categorias/lista-categorias';
+import { ListaCategorias } from './features/categorias/lista-categorias/lista-categorias';
 import { FormCategoria } from './features/categorias/form-categoria/form-categoria';
 import { DetalleProducto } from './features/productos/detalle-producto/detalle-producto';
 import { ListaUsuarios } from './features/usuarios/lista-usuarios/lista-usuarios';
@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'productos/editar/:id', component: FormProducto, canActivate: [authGuard] },
   { path: 'productos/:id', component: DetalleProducto, canActivate: [authGuard] },
 
-  { path: 'categorias', component: Listacategorias, canActivate: [authGuard] },
+  { path: 'categorias', component: ListaCategorias, canActivate: [authGuard] },
   { path: 'categorias/nuevo', component: FormCategoria, canActivate: [authGuard] },
   { path: 'categorias/editar/:id', component: FormCategoria, canActivate: [authGuard] },
 

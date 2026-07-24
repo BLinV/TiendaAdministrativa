@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './lista-categorias.html',
   styleUrl: './lista-categorias.scss'
 })
-export class Listacategorias implements OnInit {
+export class ListaCategorias implements OnInit {
   private categoriaService = inject(CategoriaService);
   private router = inject(Router);
   private notif = inject(NotificacionService);
@@ -21,7 +21,6 @@ export class Listacategorias implements OnInit {
   cargando = signal(false);
 
   ngOnInit(): void {
-    this.categoriaService.listar().subscribe(c => this.categorias.set(c));  // para el dropdown
     this.cargarcategorias();
   }
 
