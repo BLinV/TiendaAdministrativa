@@ -1,13 +1,13 @@
 .tarjeta {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
   padding: 1rem;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra);
   transition: box-shadow 0.2s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--sombra-hover);
   }
 
   h3 {
@@ -16,21 +16,61 @@
   }
 
   .descripcion {
-    color: #666;
+    color: var(--color-texto-suave);
     font-size: 0.9rem;
     margin: 0 0 0.75rem;
   }
 
   .precio {
     font-weight: bold;
-    color: #2c7a2c;
+    color: var(--color-exito);
     font-size: 1.2rem;
     margin: 0;
   }
 
   .stock {
-    color: #888;
+    color: var(--color-texto-suave);
     font-size: 0.85rem;
     margin: 0.25rem 0 0;
+  }
+
+  /* Etiqueta de clasificación: pastilla discreta, no compite con el precio */
+  .categoria {
+    display: inline-block;
+    margin-top: 0.65rem;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 999px;
+    background: var(--color-fondo);
+    color: var(--color-texto-suave);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* Ficha de detalle: rejilla de dos columnas, término | valor.
+     Solo se pinta cuando el componente recibe [detalle]="true". */
+  .ficha {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 1.25rem;
+    margin: 1rem 0 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--color-borde);
+
+    dt {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-texto-suave);
+      align-self: center;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 0.88rem;
+      /* cifras de ancho fijo: las fechas quedan alineadas entre filas */
+      font-variant-numeric: tabular-nums;
+    }
   }
 }

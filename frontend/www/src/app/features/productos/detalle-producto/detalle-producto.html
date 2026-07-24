@@ -2,8 +2,7 @@
   <h1>Detalle del producto</h1>
 
   @if (producto(); as p) {
-    <app-tarjeta-producto [producto]="p" />
-
+    <app-tarjeta-producto [producto]="p" [detalle]="true" />
     <div class="acciones-form">
       <button class="btn-secundario" (click)="volver()">Volver</button>
     </div>

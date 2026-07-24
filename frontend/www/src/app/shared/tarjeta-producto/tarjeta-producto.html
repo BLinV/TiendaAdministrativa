@@ -3,4 +3,13 @@
   <p class="descripcion">{{ producto().descripcion }}</p>
   <p class="precio">{{ producto().precio | currency }}</p>
   <p class="stock">Stock: {{ producto().stock }}</p>
+  <span class="categoria">Categoria: {{ producto().nombreCategoria }}</span>
+  @if (detalle()) {
+    <dl class="ficha">
+      <dt>Creado</dt>
+      <dd>{{ producto().fechaCreacion | date: 'dd/MM/yyyy HH:mm' }}</dd>
+      <dt>Última edición</dt>
+      <dd>{{ producto().fechaEdicion | date: 'dd/MM/yyyy HH:mm' }}</dd>
+    </dl>
+  }
 </div>
