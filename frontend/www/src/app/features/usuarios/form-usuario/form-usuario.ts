@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../core/services/usuario';
 import { NotificacionService } from '../../../core/services/notificacion';
@@ -64,5 +64,13 @@ export class FormUsuario implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/usuarios']);
+  }
+  mensajeDe(control: AbstractControl): string | null {
+    if (control.valid || !control.touched) return null;
+    if (control.hasError('required'))  return 'Este campo es obligatorio';
+    if (control.hasError('minlength')) return `Mínimo ${control.getError('minlength').requiredLength} caracteres`;
+    if (control.hasError('maxlength')) return `Máximo ${control.getError('maxlength').requiredLength} caracteres`;
+    if (control.hasError('min'))       return `Debe ser mayor o igual que ${control.getError('min').min}`;
+    return 'Valor no válido';
   }
 }
